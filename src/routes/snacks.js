@@ -11,4 +11,7 @@ router.get('/snacks', (req, res, next) => {
     .catch((err) => next(err))
 })
 
+router.get('/users')
+router.get('/reviews')
+
 module.exports = router;
