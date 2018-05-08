@@ -10,14 +10,12 @@ router.post('/:usersID', controller.update)
 router.delete('/:usersId', controller.remove)
 
 
-//reviews through users
-
 const reviewController = require('../controllers/reviews')
 
 router.get('/:usersId/reviews', reviewController.getAll)
 router.get('/:usersId/reviews/:reviewsId', reviewController.getOne)
 router.post('/:usersId/reviews', reviewController.create)
-router.post('/:userId/reviews/:reviewsId', reviewController.update)
-// router.delete('/:requestUser/reviews/:reviewsId', reviewController.remove)
+router.post('/:usersId/reviews/:reviewsId', reviewController.update)
+router.delete('/:usersId/reviews/:reviewsId', reviewController.remove)
 
 module.exports = router

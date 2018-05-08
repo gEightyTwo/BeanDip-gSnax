@@ -1,11 +1,11 @@
-const db = require('../../db')
+const knex = require('../../db/knex');
 const bcrypt = require('bcrypt-as-promised')
 const userModel = require('./users')
 
 
-function login(username, password){
+function login(email, password){
   let user
-  return userModel.getOneByUserName(username)
+  return userModel.getOneByUserName(email)
   .then(function(data){
     if(!data) throw { status: 400, message: "Bad Request"}
     user = data
