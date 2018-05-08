@@ -4,7 +4,7 @@ exports.up = function(knex, Promise) {
     table.increments();
     table.string('title').notNullable().defaultTo('');
     table.string('text').notNullable().defaultTo('');
-    table.integer('rating').notNullable().defaultTo(2.5);
+    table.string('rating').notNullable().defaultTo("2.5");
     table.integer('snack_id').notNullable().references('snacks.id');
     table.integer('user_id').notNullable().references('users.id');
   });
