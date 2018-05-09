@@ -15,11 +15,11 @@ function getOne(req, res, next){
 }
 
 function getUserByEmail(req, res, next){
-  console.log("made it to getUser controller")
-  if(!req.params.reqEmail) {
+  console.log(req.params, "made it to getUser controller")
+  if(!req.params.email) {
   return next({ status: 400, message:'Bad Request'})
 }
-  userModel.getUserbyUsername(req.params.reqEmail)
+  userModel.getUserByEmail(req.params.email)
   .then(data => {
     res.status(200).send({ data })
   })
@@ -40,17 +40,6 @@ function create(req, res, next){
   .catch(next)
 }
 
-function update(req, res, next){
-    console.log("made it to update controller")
-  if(!req.body){
-    return next({ status: 400, message:'Bad Request'})
-  }
-  userModel.update(parseInt(req.params.usersId), req.body)
-  .then(function(data){
-    res.status(200).send({ data })
-  })
-  .catch(next)
-}
 
 function remove(req, res, next){
   console.log("made it to remove controller")
@@ -61,4 +50,4 @@ function remove(req, res, next){
   .catch(next)
 }
 
-module.exports = {getOne, create, update, remove, getUserByEmail}
+module.exports = {getOne, create, remove, getUserByEmail}
