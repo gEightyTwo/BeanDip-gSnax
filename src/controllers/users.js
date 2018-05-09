@@ -2,6 +2,7 @@ const userModel = require('../models/users')
 
 
 function getOne(req, res, next){
+  console.log("made it to getOne controller")
  if(!req.params.usersId) {
    return next({ status: 400, message:'Bad Request'})
  }
@@ -13,8 +14,8 @@ function getOne(req, res, next){
  .catch(next)
 }
 
-
-function getUserbyEmail(req, res, next){
+function getUserByEmail(req, res, next){
+  console.log("made it to getUser controller")
   if(!req.params.reqEmail) {
   return next({ status: 400, message:'Bad Request'})
 }
@@ -26,18 +27,21 @@ function getUserbyEmail(req, res, next){
 }
 
 function create(req, res, next){
+  console.log("made it to create controller")
   if(!req.body.email || !req.body.password || !req.body.fname || !req.body.lname){
     return next({ status: 400, message: 'Missing user creation fields'})
   }
 
   userModel.create(req.body)
   .then(function(data){
+    console.log("made it back to controller after model")
     return res.status(201).send({ data })
   })
   .catch(next)
 }
 
 function update(req, res, next){
+    console.log("made it to update controller")
   if(!req.body){
     return next({ status: 400, message:'Bad Request'})
   }
@@ -49,6 +53,7 @@ function update(req, res, next){
 }
 
 function remove(req, res, next){
+  console.log("made it to remove controller")
   userModel.remove(parseInt(req.params.usersId))
   .then(function(data){
     res.status(200).send({ data })
@@ -56,4 +61,4 @@ function remove(req, res, next){
   .catch(next)
 }
 
-module.exports = {getOne, create, update, remove, getUserbyEmail}
+module.exports = {getOne, create, update, remove, getUserByEmail}
