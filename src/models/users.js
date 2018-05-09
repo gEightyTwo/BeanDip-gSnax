@@ -2,7 +2,8 @@ const knex = require('../../db/knex');
 const bcrypt = require('bcrypt-as-promised')
 
 
-function getUserByEmail(email){
+function getUserByEmail(userEmail){
+  let email = userEmail
   console.log(email, "made it to getUserbyemiail models")
   return (
     knex('users')
@@ -57,8 +58,4 @@ function remove(usersId){
   )
 }
 
-function update(){
-
-}
-
-module.exports = {getOne, create, update, remove, getUserByEmail}
+module.exports = {getOne, create, remove, getUserByEmail}
