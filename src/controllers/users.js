@@ -56,4 +56,4 @@ function remove(req, res, next){
   .catch(next)
 }
 
-module.exports = {getOne, create, update, remove, getUserbyUsername}
+module.exports = {getOne, create, update, remove, getUserbyEmail}

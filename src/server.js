@@ -6,19 +6,22 @@ const path = require('path');
 const app = express();
 app.use(bodyParser.json());
 
+
+const authController = require('./routes/auth')
+
 app.use('/api', require('./routes/snacks'));
-app.use('/auth', require('./routes/auth'))
+app.use('/auth', authController)
 app.use('/users', require('./routes/users'))
 
 
-app.get('/protected',
-        authController.isAuthenticated,
-        function(req, res, next){ res.send({ id: req.claim.id, message: "For authenticated eyes only" }) })
-
-app.get('/protected/:userId',
-        authController.isAuthenticated,
-        authController.isSelf,
-        function(req, res, next){ res.send({ id: req.claim.id, message: "For your eyes only"}) })
+// app.get('/protected',
+//         authController.isAuthenticated,
+//         function(req, res, next){ res.send({ id: req.claim.id, message: "For authenticated eyes only" }) })
+//
+// app.get('/protected/:userId',
+//         authController.isAuthenticated,
+//         authController.isSelf,
+//         function(req, res, next){ res.send({ id: req.claim.id, message: "For your eyes only"}) })
 
 
 app.use((req, res) => {
