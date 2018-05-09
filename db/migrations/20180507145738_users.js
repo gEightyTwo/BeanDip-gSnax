@@ -2,11 +2,11 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('users', (table) => {
     table.increments();
-    table.string('first_name').notNullable().defaultTo('');
-    table.string('last_name').notNullable().defaultTo('');
-    table.string('email').notNullable().defaultTo('');
-    table.string('hashed_password').notNullable().defaultTo('');
-    table.boolean('admin').notNullable().defaultTo(false)
+    table.string('first_name').notNullable().defaultsTo('');
+    table.string('last_name').notNullable().defaultsTo('');
+    table.string('email').notNullable().defaultsTo('');
+    table.string('hashed_password').notNullable().defaultsTo('');
+    table.boolean('admin').notNullable().defaultsTo(false)
   });
 };
 
