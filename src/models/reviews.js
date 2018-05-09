@@ -23,11 +23,11 @@ function create(usersID, snackId, title, text, rating){
   )
 }
 
-function update(usersID, reviewsId, title, text, rating){
+function update(reviewsId, title, text, rating){
   return (
     db('reviews')
-    .where({})
-    .insert({})
+    .where({id: reviewsId})
+    .insert({title, text, rating})
+    .returning('*')
   )
 }
-

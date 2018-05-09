@@ -23,7 +23,7 @@ function create(req, res, next){
   if(!req.params.usersId){
     return next({status:400, message:'Bad Request'})
   }
-  reviewModel.create(req.params.usersId,req.params.snackId, req.body.title, req.body.text, req.body.rating)
+  reviewModel.create(req.params.usersId, req.params.snackId, req.body.title, req.body.text, req.body.rating)
   .then(review => {
     res.status(200).send({review})
   })
@@ -31,10 +31,10 @@ function create(req, res, next){
 }
 
 function update(req, res, next){
-  if(!req.params.usersId || !req.params.reviewsId){
+  if(!req.params.reviewsId){
     return next({status:400, message:'Bad Request'})
   }
-  reviewModel.update(req.params.usersId, req.params.reviewsId, req.body.title, req.body.text, req.body.rating)
+  reviewModel.update(req.params.reviewsId, req.body.title, req.body.text, req.body.rating)
   .then(review => {
     res.status(200).send({review})
   })
