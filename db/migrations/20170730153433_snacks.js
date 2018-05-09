@@ -2,11 +2,11 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('snacks', (table) => {
     table.increments();
-    table.string('name').notNullable().defaultTo('');
-    table.text('description').notNullable().defaultTo('');
+    table.string('name').notNullable().defaultsTo('');
+    table.text('description').notNullable().defaultsTo('');
     table.float('price');
-    table.text('img').notNullable().defaultTo('');
-    table.boolean('is_perishable').notNullable().defaultTo(false);
+    table.text('img').notNullable().defaultsTo('');
+    table.boolean('is_perishable').notNullable().defaultsTo(false);
   });
 };
 
