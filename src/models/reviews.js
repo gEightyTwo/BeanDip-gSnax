@@ -3,21 +3,21 @@ const bcrypt = require('bcrypt-as-promised')
 
 function getAll(){
   return (
-    db('reviews')
+    knex('reviews')
     .returning('*')
   )
 }
 
 function getOne(id){
   return (
-    db('reviews')
+    knex('reviews')
     .where({id})
   )
 }
 
 function create(usersID, snackId, title, text, rating){
   return (
-    db('reviews')
+    knex('reviews')
     .insert({user_id: usersID, snack_id: snackId, title, text, rating})
     .returning('*')
   )
@@ -25,9 +25,17 @@ function create(usersID, snackId, title, text, rating){
 
 function update(reviewsId, title, text, rating){
   return (
-    db('reviews')
+    knex('reviews')
     .where({id: reviewsId})
     .insert({title, text, rating})
     .returning('*')
   )
+}
+
+function remove(reviewsId){
+  return (
+    knex('reviews')
+    .where({id: reviewsId})
+    .del()
+    .returning('*')
 }

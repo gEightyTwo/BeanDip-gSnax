@@ -31,7 +31,7 @@ function create(req, res, next){
 }
 
 function update(req, res, next){
-  if(!req.params.reviewsId){
+  if(!req.params.reviewsId || !req.params.usersId){
     return next({status:400, message:'Bad Request'})
   }
   reviewModel.update(req.params.reviewsId, req.body.title, req.body.text, req.body.rating)
@@ -42,7 +42,14 @@ function update(req, res, next){
 }
 
 function remove(req, res, next){
-
+  if(!req.params.reviewsId || !req.params.usersId){
+    return next({status:400, message:'Bad Request'})
+  }
+  reviewModel.remove(req.params.reviewsId)
+  .then(review => {
+    res.status(200).send({review})
+  })
+  .catch(next)
 }
 
 module.exports = {getOne, getAll, create, update, remove}
