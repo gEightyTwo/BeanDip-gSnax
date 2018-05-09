@@ -45,4 +45,4 @@ function remove(req, res, next){
 
 }
 
-module.exports = {getOne, getAll, create, update, remove)
+module.exports = {getOne, getAll, create, update, remove}
