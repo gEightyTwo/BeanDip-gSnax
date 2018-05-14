@@ -24,10 +24,21 @@ function create(usersID, snackId, title, text, rating){
 }
 
 function update(reviewsId, title, text, rating){
+  const toUpdate = {}
+  if(title){
+    toUpdate.title = title
+  }
+  if(text){
+    toUpdate.text = text
+  }
+  if(rating){
+    toUpdate.rating = rating
+  }
+
   return (
     knex('reviews')
     .where({id: reviewsId})
-    .insert({title, text, rating})
+    .update(toUpdate)
     .returning('*')
   )
 }
@@ -38,4 +49,7 @@ function remove(reviewsId){
     .where({id: reviewsId})
     .del()
     .returning('*')
+  )
 }
+
+module.exports = {getOne, getAll, create, update, remove}
