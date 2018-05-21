@@ -5,7 +5,6 @@ const controller = require('../controllers/users')
 
 
 router.get('/:usersId/', controller.getOne)
-router.get('/reqUser/:email', controller.getUserByEmail)
 router.post('/', controller.create)
 router.delete('/:usersId', controller.remove)
 
