@@ -2,13 +2,13 @@ const express = require('express')
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const path = require('path');
-
+const cors = require('cors')
 const app = express();
 app.use(bodyParser.json());
 
 
 const authController = require('./routes/auth')
-
+app.use(cors())
 app.use('/api', require('./routes/snacks'));
 app.use('/auth', authController)
 app.use('/users', require('./routes/users'))
