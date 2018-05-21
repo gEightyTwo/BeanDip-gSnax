@@ -3,31 +3,53 @@ const bcrypt = require('bcrypt-as-promised')
 
 function getAll(){
   return (
-    db('reviews')
+    knex('reviews')
     .returning('*')
   )
 }
 
 function getOne(id){
   return (
-    db('reviews')
+    knex('reviews')
     .where({id})
   )
 }
 
 function create(usersID, snackId, title, text, rating){
   return (
-    db('reviews')
+    knex('reviews')
     .insert({user_id: usersID, snack_id: snackId, title, text, rating})
     .returning('*')
   )
 }
 
-function update(usersID, reviewsId, title, text, rating){
+function update(reviewsId, title, text, rating){
+  const toUpdate = {}
+  if(title){
+    toUpdate.title = title
+  }
+  if(text){
+    toUpdate.text = text
+  }
+  if(rating){
+    toUpdate.rating = rating
+  }
+
   return (
-    db('reviews')
-    .where({})
-    .insert({})
+    knex('reviews')
+    .where({id: reviewsId})
+    .update(toUpdate)
+    .returning('*')
   )
 }
 
+function remove(reviewsId){
+  return (
+    knex('reviews')
+    .where({id: reviewsId})
+    .del()
+    .returning('*')
+  )
+}
+
+module.exports = {getOne, getAll, create, update, remove}
