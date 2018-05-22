@@ -1,22 +1,37 @@
-const knex = require('../../db/knex');
+const db = require('../../db')
 const bcrypt = require('bcrypt-as-promised')
-const userModel = require('./users')
+const userModel = require('./shops')
 
+//////////////////////////////////////////////////////////////////////////////
+// Basic CRUD Methods
+//////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////
+// Login
+//
+// 1. Check to see if user already exists
+//   a. if not, return a 400 with appropriate error message
+// 2. compare password in the database with the password provided by user
+// 3. If the passwords do not match, respond with 401 Unauthorized
+// 4. strip hashed password away from object
+// 5. "return/continue" promise
+//////////////////////////////////////////////////////////////////////////////
 
 function login(email, password){
-  let user
-  return userModel.getOneByUserName(email)
+  let staff
+  // 1. Check to see if user already exists
+  return userModel.getStaffByEmail(email)
   .then(function(data){
     if(!data) throw { status: 400, message: "Bad Request"}
-    user = data
+    staff = data
     return bcrypt.compare(password, data.password)
   })
   .catch(bcrypt.MISMATCH_ERROR, function(){
     throw { status: 401, message: "Unauthorized"}
   })
   .then(function(){
-    delete user.password
-    return user
+    delete staff.password
+    return staff
   })
 }
 
