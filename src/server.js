@@ -12,6 +12,7 @@ app.use(cors())
 app.use('/api', require('./routes/snacks'));
 app.use('/auth', authController)
 app.use('/users', require('./routes/users'))
+app.use('/reviews', require('./routes/reviews'))
 
 
 // app.get('/protected',
