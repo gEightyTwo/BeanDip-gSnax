@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt-as-promised')
 function getAll(){
   return (
     knex('reviews')
+    .innerJoin('users', 'user_id', 'users.id')
     .returning('*')
   )
 }
