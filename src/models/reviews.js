@@ -16,12 +16,26 @@ function getOne(id){
   )
 }
 
-function create(usersID, snackId, title, text, rating){
+function checkUser(usersID, snackId){
   return (
+    knex('reviews')
+    .where({ snack_id: snackId, user_id: usersId })
+    .first()
+  )
+}
+
+function create(usersID, snackId, title, text, rating){
+  console.log(usersID, snackId, title, text, rating)
+
+  return checkUser(usersID, snackId)
+  .then(data => {
+    if(data) throw { status: 400, message:'User already created snack'}
+    return (
     knex('reviews')
     .insert({user_id: usersID, snack_id: snackId, title, text, rating})
     .returning('*')
-  )
+    )
+  })
 }
 
 function update(reviewsId, title, text, rating){
