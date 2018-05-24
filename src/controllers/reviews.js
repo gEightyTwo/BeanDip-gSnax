@@ -20,7 +20,8 @@ function getOne(req, res, next){
 }
 
 function create(req, res, next){
-  if(!req.params.usersId){
+  console.log("params:",req.params, "body:", req.body)
+  if(!req.body.usersId){
     return next({status:400, message:'Bad Request'})
   }
   reviewModel.create(req.body.usersId, req.params.snackId, req.body.title, req.body.text, req.body.rating)
