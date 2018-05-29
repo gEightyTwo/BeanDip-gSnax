@@ -21,7 +21,7 @@ function login(username, password){
   let user
 
   // 1. Check to see if user already exists
-  return userModel.getOneByUserName(username)
+  return userModel.getUserByEmail(username)
   .then(function(data){
     // 1a. if not, return a 400 with appropriate error message
     if(!data) throw { status: 400, message: "Bad Request"}
@@ -30,7 +30,7 @@ function login(username, password){
     user = data
 
     // 2. compare password in the database with the password provided by user
-    return bcrypt.compare(password, data.password)
+    return bcrypt.compare(password, data.hashed_password)
   })
   .catch(bcrypt.MISMATCH_ERROR, function(){
     // 3. If the passwords do not match, respond with 401 Unauthorized
