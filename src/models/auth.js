@@ -3,7 +3,6 @@ const userModel = require('./users')
 
 function login(email, password){
   let user
-
   return userModel.getUserByEmail(email)
   .then(function(data){
     if(!data) throw { status: 400, message: "Bad Request"}

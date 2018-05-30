@@ -25,15 +25,11 @@ function login(req, res, next){
   if(!req.body.password){
     return next({ status: 400, message: 'Bad request'})
   }
-
-  // 2. Attempt Login
   authModel.login(req.body.email, req.body.password)
   .then(function({id, email}){
     console.log(id, email)
-    // 3. Create token
-    const token = jwt.sign({id, email}, process.env.SECRET)
+      const token = jwt.sign({id, email}, process.env.SECRET)
 
-    // 4. Send back token
     return res.status(200).send({ token })
   })
   .catch(next)
