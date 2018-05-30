@@ -6,7 +6,6 @@ function login(email, password){
 
   return userModel.getUserByEmail(email)
   .then(function(data){
-    console.log("inside data function")
     if(!data) throw { status: 400, message: "Bad Request"}
     user = data
     return bcrypt.compare(password, data.hashed_password)
@@ -15,9 +14,7 @@ function login(email, password){
     throw { status: 401, message: "Unauthorized"}
   })
   .then(function(){
-
     delete user.password
-
     return user
   })
 }
