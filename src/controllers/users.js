@@ -33,9 +33,11 @@ function create(req, res, next){
   }
 
   userModel.create(req.body)
-  .then(function(data){
-    console.log("made it back to controller after model")
-    return res.status(201).send({ data })
+  .then(function(data) {
+    
+    return res.status(201).send({
+      data
+    })
   })
   .catch(next)
 }
