@@ -3,8 +3,8 @@ const bcrypt = require('bcrypt-as-promised')
 
 function getAll(){
   return (
-    knex('reviews')
-    // .leftJoin('users', 'user_id', 'users.id')
+    knex('users')
+    .innerJoin('reviews', 'reviews.user_id', 'users.id')
     .returning('*')
   )
 }
@@ -40,6 +40,7 @@ function create(usersID, snackId, title, text, rating){
 }
 
 function update(reviewsId, title, text, rating){
+  console.log("made it to update reviews - models")
   const toUpdate = {}
   if(title){
     toUpdate.title = title
@@ -50,7 +51,6 @@ function update(reviewsId, title, text, rating){
   if(rating){
     toUpdate.rating = rating
   }
-
   return (
     knex('reviews')
     .where({id: reviewsId})
