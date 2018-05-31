@@ -1,6 +1,7 @@
 const authModel = require('../models/auth')
 const jwt = require('jsonwebtoken')
 
+
 //////////////////////////////////////////////////////////////////////////////
 // Basic CRUD Methods
 //////////////////////////////////////////////////////////////////////////////
@@ -20,19 +21,13 @@ function login(req, res, next){
   if(!req.body.username){
     return next({ status: 400, message: 'Bad request'})
   }
-
   if(!req.body.password){
     return next({ status: 400, message: 'Bad request'})
   }
-
-  // 2. Attempt Login
   authModel.login(req.body.username, req.body.password)
-  .then(function({id, email}){
-    console.log(id, email, process.env.SECRET)
-    // 3. Create token
-    const token = jwt.sign({id, email }, process.env.SECRET)
+  .then(function({id, email, first_name}){
+      const token = jwt.sign({id, email, first_name}, process.env.SECRET)
 
-    // 4. Send back token
     return res.status(200).send({ token })
   })
   .catch(next)

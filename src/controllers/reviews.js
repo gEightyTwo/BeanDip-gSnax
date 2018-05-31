@@ -32,7 +32,7 @@ function create(req, res, next){
 }
 
 function update(req, res, next){
-  if(!req.params.reviewsId || !req.params.usersId){
+  if(!req.params.reviewsId){
     return next({status:400, message:'Bad Request'})
   }
   reviewModel.update(req.params.reviewsId, req.body.title, req.body.text, req.body.rating)
@@ -43,7 +43,7 @@ function update(req, res, next){
 }
 
 function remove(req, res, next){
-  if(!req.params.reviewsId || !req.body.usersId){
+  if(!req.params.reviewsId){
     return next({status:400, message:'Bad Request'})
   }
   reviewModel.remove(req.params.reviewsId)

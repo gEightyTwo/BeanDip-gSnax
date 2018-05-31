@@ -4,16 +4,15 @@ const bcrypt = require('bcrypt-as-promised')
 
 function getUserByEmail(userEmail){
   let email = userEmail
-  console.log(email, "made it to getUserbyemiail models")
+  console.log(email, "made it to getUserbyemail models")
   return (
     knex('users')
-    .where({ email })
+    .where({ email : userEmail})
     .first()
   )
 }
 
 function getOne(usersId){
-  console.log(usersId, "made it to getOne model")
   return (
     knex('users')
     .where({ id: usersId })
