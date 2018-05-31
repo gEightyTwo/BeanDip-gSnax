@@ -32,6 +32,7 @@ function create(req, res, next){
 }
 
 function update(req, res, next){
+  console.log("controllers=reviews");
   if(!req.params.reviewsId){
     return next({status:400, message:'Bad Request'})
   }
