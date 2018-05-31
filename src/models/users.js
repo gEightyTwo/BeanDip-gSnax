@@ -13,7 +13,6 @@ function getUserByEmail(userEmail){
 }
 
 function getOne(usersId){
-  console.log(usersId, "made it to getOne model")
   return (
     knex('users')
     .where({ id: usersId })
